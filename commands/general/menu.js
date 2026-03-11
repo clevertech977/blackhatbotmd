@@ -16,33 +16,26 @@ module.exports = {
     try {
       const commands = loadCommands();
       const categories = {};
-
+      
       // Group commands by category
       commands.forEach((cmd, name) => {
-        if (cmd.name === name) { // Only main command names
-          if (!categories[cmd.category]) categories[cmd.category] = [];
+        if (cmd.name === name) { // Only count main command names, not aliases
+          if (!categories[cmd.category]) {
+            categories[cmd.category] = [];
+          }
           categories[cmd.category].push(cmd);
         }
       });
-
-      // Owner info
+      
       const ownerNames = Array.isArray(config.ownerName) ? config.ownerName : [config.ownerName];
-      const displayOwner = ownerNames[0] || 'Bot Owner';
-
-      // 1️⃣ Premium check
-      const premiumNumber = config.ownerNumber; // premium number
-      const senderNumber = extra.sender.split('@')[0];
-      const isPremium = senderNumber === premiumNumber;
-      const premiumText = isPremium ? '💎 You are a Premium user' : '❌ You are not Premium';
-
-      // 2️⃣ Menu header
-      let menuText = `╭━━『 *${config.botName || 'Bot'}* 』━━╮\n\n`;
-      menuText += `👋 Hello @${senderNumber}!\n`;
-      menuText += `${premiumText}\n\n`; // show premium status
-      menuText += `⚡ Prefix: ${config.prefix || '.'}\n`;
+      const displayOwner = ownerNames[0] || config.ownerName || 'Bot Owner';
+      
+      let menuText = `╭━━『 *${config.botName}* 』━━╮\n\n`;
+      menuText += `👋 Hello @${extra.sender.split('@')[0]}!\n\n`;
+      menuText += `⚡ Prefix: ${config.prefix}\n`;
       menuText += `📦 Total Commands: ${commands.size}\n`;
       menuText += `👑 Owner: ${displayOwner}\n\n`;
-
+      
       // General Commands
       if (categories.general) {
         menuText += `╭━━━━━━━━━━━━━━━❍\n`;
@@ -76,35 +69,26 @@ module.exports = {
         menuText += `\n`;
       }
       
-
-      // Admin Commands (premium only)
+      // Admin Commands
       if (categories.admin) {
-        if (isPremium) {
-          menuText += `╭━━━━━━━━━━━━━━━❍\n`;
-          menuText += `┃ 🛡️ ADMIN COMMAND\n`;
-          menuText += `╰━━━━━━━━━━━━━━━⬣\n`;
-          categories.admin.forEach(cmd => {
-            menuText += `│ ➜ ${config.prefix}${cmd.name}\n`;
-          });
-          menuText += `\n`;
-        } else {
-          menuText += `⚠️ Admin commands are for Premium users only.\n\n`;
-        }
+        menuText += `╭━━━━━━━━━━━━━━━❍\n`;
+        menuText += `┃ 🛡️ ADMIN COMMAND\n`;
+        menuText += `╰━━━━━━━━━━━━━━━⬣\n`;
+        categories.admin.forEach(cmd => {
+          menuText += `│ ➜ ${config.prefix}${cmd.name}\n`;
+        });
+        menuText += `\n`;
       }
       
-      // Owner Commands (premium only)
+      // Owner Commands
       if (categories.owner) {
-        if (isPremium) {
-          menuText += `╭━━━━━━━━━━━━━━━❍\n`;
-          menuText += `┃ 👑 OWNER COMMAND\n`;
-          menuText += `╰━━━━━━━━━━━━━━━⬣\n`;
-          categories.owner.forEach(cmd => {
-            menuText += `│ ➜ ${config.prefix}${cmd.name}\n`;
-          });
-          menuText += `\n`;
-        } else {
-          menuText += `⚠️ Owner commands are for Premium users only.\n\n`;
-        }
+        menuText += `╭━━━━━━━━━━━━━━━❍\n`;
+        menuText += `┃ 👑 OWNER COMMAND\n`;
+        menuText += `╰━━━━━━━━━━━━━━━⬣\n`;
+        categories.owner.forEach(cmd => {
+          menuText += `│ ➜ ${config.prefix}${cmd.name}\n`;
+        });
+        menuText += `\n`;
       }
       
       // Media Commands
@@ -162,7 +146,7 @@ module.exports = {
         menuText += `\n`;
       }
       
-      menuText += `╰━━━━━━━━━━━━━━━━━\n\n`;
+      menuText += `╰━━━━━━━━━━━━━━━━━⬣\n\n`;
       menuText += `💡 Type ${config.prefix}help <command> for more info\n`;
       menuText += `🌟 Bot Version: 1.0.0\n`;
       

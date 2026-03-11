@@ -95,10 +95,7 @@ const getCachedGroupMetadata = async (sock, groupId) => {
   }
 };
 
-const command = commands.get(cmdName);
-if (command) {
-    await command.execute(sock, msg, args, extra);
-}
+
 
 
 

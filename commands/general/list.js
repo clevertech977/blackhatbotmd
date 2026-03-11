@@ -64,14 +64,14 @@ module.exports = {
             name: 'cta_url',
             buttonParamsJson: JSON.stringify({
               display_text: 'Youtube',
-              url: config.social?.youtube || 'http://youtube.com/@clever Mumba'
+              url: config.social?.youtube || 'http://youtube.com/@clevertech977'
             })
           },
           {
             name: 'cta_url',
             buttonParamsJson: JSON.stringify({
               display_text: 'Visit Bot Repo',
-              url: config.social?.github || 'https://github.com/clevertech97/blackhatbotmd'
+              url: config.social?.github || 'https://github.com/clevertech977/blackhatbotmd'
             })
           },
           {

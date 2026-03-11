@@ -1,12 +1,12 @@
 <div align="center">
 
-## Black hat Bot Mini
+## Black hat Bot 
 
 [![Made with Baileys](https://img.shields.io/badge/Made%20with-Baileys-00bcd4?style=for-the-badge)](https://github.com/WhiskeySockets/Baileys)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-<img src="utils/bot_image.jpg" alt="𝐛𝐥𝐚𝐜𝐤 𝐡𝐚𝐭 𝐛𝐨𝐭 𝐦𝐝 Bot Mini" width="260">
+<img src="utils/bot_image.jpg" alt="𝐛𝐥𝐚𝐜𝐤 𝐡𝐚𝐭 𝐛𝐨𝐭 𝐦𝐝 Bot" width="260">
 
 </div>
 
@@ -32,7 +32,7 @@ All commands and the overall structure are written in a way that makes customiza
 
 <div align="center">
 
-<a href="https://github.com/clevertech97/blackhatbotmd/fork" target="_blank">
+<a href="https://github.com/clevertech977/blackhatbotmd/fork" target="_blank">
   <img src="https://img.shields.io/badge/Fork%20Repository-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Fork on GitHub">
 </a>
 
@@ -89,8 +89,8 @@ Or set it via the `SESSION_ID` environment variable when hosting.
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/clevertech97/blackhatbotmd.git
-cd Knightbot-Mini
+git clone https://github.com/clevertech977/blackhatbotmd.git
+cd blackhatbotmd
 ```
 
 ### 2️⃣ Install dependencies
@@ -134,7 +134,7 @@ When the bot starts:
 
 <div align="center">
 
-<a href="https://t.me/clevertech997" target="_blank">
+<a href="https://t.me/clevertech977" target="_blank">
   <img src="https://img.shields.io/badge/Join-Telegram-0088cc?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Telegram">
 </a>
 

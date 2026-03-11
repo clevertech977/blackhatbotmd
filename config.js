@@ -13,7 +13,7 @@ module.exports = {
     sessionName: 'session',
     sessionID: process.env.SESSION_ID || '',
     newsletterJid: '120363422524788798@newsletter', // Newsletter JID for menu forwarding
-    updateZipUrl: 'https://github.com/clevertech97/blackhatbotmd/archive/refs/heads/main.zip', // URL to latest code zip for .update command
+    updateZipUrl: 'https://github.com/clevertech977/blackhatbotmd/archive/refs/heads/main.zip', // URL to latest code zip for .update command
     
     // Sticker Configuration
     packname: '𝐛𝐥𝐚𝐜𝐤 𝐡𝐚𝐭 𝐛𝐨𝐭 𝐦𝐝',
@@ -69,7 +69,7 @@ module.exports = {
       adminOnly: '🛡️ This command is only for group admins!',
       groupOnly: '👥 This command can only be used in groups!',
       privateOnly: '💬 This command can only be used in private chat!',
-      botAdminNeeded: '🤖 Bot needs to be admin to execute this command!',
+      botAdminNeeded: '🤖 Bot needs to be group admin to execute this command!',
       invalidCommand: '❓ Invalid command! Type .menu for help'
     },
     
@@ -81,9 +81,9 @@ module.exports = {
     
     // Social Links (optional)
     social: {
-      github: 'https://github.com/clevertech97',
+      github: 'https://github.com/clevertech977',
       instagram: 'https://instagram.com/yourusername',
-      youtube: 'http://youtube.com/@yourusername'
+      youtube: 'http://youtube.com/@clevertech977'
     }
 };
   

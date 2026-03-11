@@ -70,15 +70,38 @@ Or set it via the `SESSION_ID` environment variable when hosting.
 
 ---
 
-### 3. Deploy on Panel (Katabump, etc.)
+# 🚀 Deploy
+
+You can deploy **Black Hat Bot ** on several hosting platforms easily.
+
+---
+
+# 🌐 Recommended Hosting
 
 <div align="center">
 
-<a href="https://dashboard.katabump.com/auth/login#3630c0" target="_blank">
-  <img src="https://img.shields.io/badge/Deploy%20on-Katabump-orange?style=for-the-badge" alt="Deploy on Katabump">
+### 🧠 Bot Hosting Panel
+
+<a href="https://bot-hosting.net/?aff=1357362933151305758">
+
+<img src="https://img.shields.io/badge/Deploy%20on-Bot%20Hosting-ff6600?style=for-the-badge&logo=server&logoColor=white"/>
+
 </a>
 
 </div>
+
+**Bot Hosting Panel** provides:
+
+* ⚡ High performance servers
+* 🔒 Secure environment
+* 🖥 Easy control panel
+* 🌍 24/7 uptime
+* 📦 Simple bot deployment
+
+Perfect for **WhatsApp bots and automation projects**.
+
+
+
 
 
 

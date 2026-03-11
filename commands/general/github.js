@@ -15,8 +15,8 @@ module.exports = {
     async execute(sock, msg, args, extra) {
         try {
             const chatId = extra.from;
-            const repoUrl = 'https://github.com/clevertech97/blackhatbotmd';
-            const apiUrl = 'https://api.github.com/repos/clevertech97/blackhatbotmd';
+            const repoUrl = 'https://github.com/clevertech977/blackhatbotmd';
+            const apiUrl = 'https://api.github.com/repos/clevertech977/blackhatbotmd';
 
             const loadingMsg = await extra.reply('🔍 Fetching GitHub repository information...');
 
@@ -63,7 +63,7 @@ module.exports = {
                 const templateButtons = [
                     { urlButton: { displayText: '⭐ Star', url: `${repo.html_url}/stargazers` } },
                     { urlButton: { displayText: '🍴 Fork', url: `${repo.html_url}/fork` } },
-                    { urlButton: { displayText: '📥 Clone', url: `https://github.com/clevertech97/blackhatbotmd.git` } }
+                    { urlButton: { displayText: '📥 Clone', url: `https://github.com/clevertech977/blackhatbotmd.git` } }
                 ];
 
                 // Send forwarded message with thumbnail, caption, buttons
@@ -90,7 +90,7 @@ module.exports = {
 
 🤖 *Bot Name:* ${config.botName}
 🔗 *Repository:* 𝐛𝐥𝐚𝐜𝐤 𝐡𝐚𝐭 𝐛𝐨𝐭 𝐦𝐝
-👨‍💻 *Owner:* clevertech97
+👨‍💻 *Owner:* clevertech977
 🌐 URL: ${repoUrl}
 
 ⚠️ Unable to fetch real-time stats. Please visit repository directly.

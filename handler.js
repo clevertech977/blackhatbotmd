@@ -95,10 +95,6 @@ const getCachedGroupMetadata = async (sock, groupId) => {
   }
 };
 
-
-
-
-
 // Live group metadata getter (always fresh, no cache) - for admin checks
 const getLiveGroupMetadata = async (sock, groupId) => {
   try {
@@ -291,6 +287,57 @@ const findParticipant = (participants = [], userIds) => {
     
     return participantIds.some(id => targets.includes(id));
   }) || null;
+};
+
+module.exports = (sock) => {
+
+sock.ev.on('messages.upsert', async ({ messages }) => {
+  try {
+    const msg = messages[0];
+    if (!msg || !msg.message) return;
+
+    const m = getMessageContent(msg);
+    if (!m) return;
+
+    const from = msg.key.remoteJid;
+    const sender = msg.key.participant || msg.key.remoteJid;
+
+    const text =
+      m.conversation ||
+      m.extendedTextMessage?.text ||
+      m.imageMessage?.caption ||
+      m.videoMessage?.caption ||
+      '';
+
+    if (!text) return;
+
+    const prefix = config.prefix || '.';
+
+    if (!text.startsWith(prefix)) return;
+
+    const args = text.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+
+    const command =
+      commands.get(commandName) ||
+      [...commands.values()].find(cmd => cmd.aliases?.includes(commandName));
+
+    if (!command) return;
+
+    const extra = {
+      from,
+      sender,
+      reply: (text) =>
+        sock.sendMessage(from, { text }, { quoted: msg })
+    };
+
+    await command.exec(sock, msg, args, extra);
+
+  } catch (err) {
+    console.error('Message handler error:', err);
+  }
+});
+
 };
 
 const isAdmin = async (sock, participant, groupId, groupMetadata = null) => {

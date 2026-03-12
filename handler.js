@@ -288,55 +288,77 @@ const findParticipant = (participants = [], userIds) => {
     return participantIds.some(id => targets.includes(id));
   }) || null;
 };
-
 module.exports = (sock) => {
 
-sock.ev.on('messages.upsert', async ({ messages }) => {
-  try {
-    const msg = messages[0];
-    if (!msg || !msg.message) return;
+  sock.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+      for (let msg of messages) {
+        if (!msg.message) continue;
 
-    const m = getMessageContent(msg);
-    if (!m) return;
+        const from = msg.key.remoteJid;
+        const sender = msg.key.participant || msg.key.remoteJid;
 
-    const from = msg.key.remoteJid;
-    const sender = msg.key.participant || msg.key.remoteJid;
+        const text =
+          msg.message.conversation ||
+          msg.message.extendedTextMessage?.text ||
+          msg.message.imageMessage?.caption ||
+          msg.message.videoMessage?.caption ||
+          '';
+          
+                  // -----------------------------
+        // ✅ Step 1: Show typing BEFORE command execution
+        // -----------------------------
+        await autotyping.handleAutotypingForMessage(sock, from, text);
+          
+        // ========================
+        // 1️⃣ Auto-delete silenced messages
+        // ========================
+        if (from.endsWith('@g.us')) { // Only for groups
+          const deleted = await silenceCommand.checkSilenced(sock, msg);
+          if (deleted) continue; // skip command processing if deleted
+        }
 
-    const text =
-      m.conversation ||
-      m.extendedTextMessage?.text ||
-      m.imageMessage?.caption ||
-      m.videoMessage?.caption ||
-      '';
+        // ========================
+        // 2️⃣ Command handling
+        // ========================
+        if (!text) continue;
 
-    if (!text) return;
+        const prefix = config.prefix || '.';
+        if (!text.startsWith(prefix)) continue;
 
-    const prefix = config.prefix || '.';
+        const args = text.slice(prefix.length).trim().split(/ +/);
+        const commandName = args.shift().toLowerCase();
 
-    if (!text.startsWith(prefix)) return;
+        const command =
+          commands.get(commandName) ||
+          [...commands.values()].find(cmd => cmd.aliases?.includes(commandName));
 
-    const args = text.slice(prefix.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
+        if (!command) continue;
 
-    const command =
-      commands.get(commandName) ||
-      [...commands.values()].find(cmd => cmd.aliases?.includes(commandName));
+        const extra = {
+          from,
+          sender,
+          reply: async (msgText) => await sock.sendMessage(from, { text: msgText }, { quoted: msg })
+        };
 
-    if (!command) return;
+        // NOTE: Make sure your commands export "execute" NOT "exec"
+        if (typeof command.execute === 'function') {
+          await command.execute(sock, msg, args, extra);
+        } else if (typeof command.exec === 'function') {
+          await command.exec(sock, msg, args, extra);
+        } else {
+          console.warn(`Command ${commandName} has no execute/exec function.`);
+        }
+                  // -----------------------------
+        // ✅ Step 3: Show typing AFTER command execution (optional)
+        // -----------------------------
+        await autotyping.showTypingAfterCommand(sock, from);
 
-    const extra = {
-      from,
-      sender,
-      reply: (text) =>
-        sock.sendMessage(from, { text }, { quoted: msg })
-    };
-
-    await command.exec(sock, msg, args, extra);
-
-  } catch (err) {
-    console.error('Message handler error:', err);
-  }
-});
+      }
+    } catch (err) {
+      console.error('Message handler error:', err);
+    }
+  });
 
 };
 

@@ -10,7 +10,7 @@ module.exports = {
     usage: '.grouplink',
     groupOnly: true,
     adminOnly: true,
-    botAdminNeeded: true,
+    botAdminNeeded: false,
     
     async execute(sock, msg, args, extra) {
       try {

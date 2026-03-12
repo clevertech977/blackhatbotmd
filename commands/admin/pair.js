@@ -1,7 +1,3 @@
-/**
- * Pair Command - Connect number via external pairing API
- */
-
 const axios = require('axios');
 
 module.exports = {
@@ -16,22 +12,21 @@ module.exports = {
       const number = args[0];
       if (!number) return extra.reply('❌ Usage: .pair <number>');
 
-      await extra.reply('⏳ Trying to pair number...');
+      await extra.reply('⏳ Generating pairing code...');
 
-      // Call your external API
-      const response = await axios.post('https://blackhat-bot-pair-code-production-95ea.up.railway.app/pair', {
-        number
-      });
+      const response = await axios.get(
+        `https://blackhat-bot-pair-code-production.up.railway.app/pair?number=${number}`
+      );
 
-      if (response.data?.success) {
-        return extra.reply(`✅ Number ${number} successfully paired!\nCode: ${response.data.code || 'N/A'}`);
-      } else {
-        return extra.reply(`❌ Failed to pair number ${number}.\n${response.data?.message || ''}`);
+      if (response.data?.code) {
+        return extra.reply(`✅ Pairing Code:\n\n${response.data.code}`);
       }
+
+      return extra.reply('❌ Failed to generate pairing code.');
 
     } catch (error) {
       console.error('Pair command error:', error.message);
-      await extra.reply(`❌ Error pairing number: ${error.message}`);
+      return extra.reply('❌ Failed to connect to pairing server.');
     }
   }
 };

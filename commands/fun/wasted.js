@@ -8,7 +8,7 @@ module.exports = {
   desc: 'Make someone look WASTED 💀',
   usage: '.wasted @user or reply',
 
-  async exec(sock, message, args, extra) {
+async execute(sock, message, args, extra) {
     const chatId = extra.from;
 
     let userToWaste;

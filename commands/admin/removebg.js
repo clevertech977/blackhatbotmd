@@ -20,7 +20,7 @@ module.exports = {
     alias: ['rmbg', 'nobg'],
     category: 'admin',
     desc: 'Remove background from images',
-    async exec(sock, message, args, extra) {
+    async execute(sock, message, args, extra) {
         const chatId = message.key.remoteJid;
 
         try {

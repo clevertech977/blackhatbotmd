@@ -230,7 +230,7 @@ async function startBot() {
     logger: suppressedLogger,
     printQRInTerminal: false,
     // Use a common desktop browser signature
-    browser: ["Mac OS", "Chrome", "10.0"],
+    browser: Browsers.macOS('Desktop'),
     auth: state,
     // Memory optimization: prevent loading old messages into RAM
     syncFullHistory: false,

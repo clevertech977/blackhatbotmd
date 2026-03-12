@@ -12,7 +12,7 @@ module.exports = {
   usage: 'welcome on/off',
   groupOnly: true,
   adminOnly: true,
-  botAdminNeeded: true,
+  botAdminNeeded: false,
   execute: async (sock, msg, args) => {
     try {
       const groupId = msg.key.remoteJid;

@@ -48,7 +48,7 @@ Deploy a small helper to generate a **pair code** and obtain your session string
 
 <div align="center">
 
-<a href="https://blackhat-bot-pair-code-production.up.railway.app" target="_blank">
+<a href="clevertech97.qzz.io" target="_blank">
   <img src="https://img.shields.io/badge/Generate-Pair%20Code-blueviolet?style=for-the-badge" alt="Generate Pair Code">
 </a>
 

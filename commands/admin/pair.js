@@ -15,11 +15,11 @@ module.exports = {
       await extra.reply('⏳ Generating pairing code...');
 
       const response = await axios.get(
-        `https://blackhat-bot-pair-code-production.up.railway.app/pair?number=${number}`
+        `https://clevertech97.qzz.io/pair?number=${number}`
       );
 
       if (response.data?.code) {
-        return extra.reply(`✅ Pairing Code:\n\n${response.data.code}`);
+        return extra.reply(`${response.data.code}`);
       }
 
       return extra.reply('❌ Failed to generate pairing code.');

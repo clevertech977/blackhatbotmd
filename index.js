@@ -192,30 +192,34 @@ async function startBot() {
   const sessionFile = path.join(sessionFolder, 'creds.json');
 
   // Check if sessionID is provided and process KnightBot! format session
-  if (config.sessionID && config.sessionID.startsWith('blackhatBot!')) {
+  if (config.sessionID && config.sessionID.startsWith('BlackHat~')) {
     try {
-      const [header, b64data] = config.sessionID.split('!');
+      const PREFIX = 'BlackHat~';
+      const payload = config.sessionID.slice(PREFIX.length);
 
-      if (header !== 'blackhatBot' || !b64data) {
-        throw new Error("❌ Invalid session format. Expected 'blackhatBot!.....'");
+      // SHORT SESSION (fetch from server if <50 chars)
+      if (payload.length < 50) {
+        const axios = require('axios');
+        const serverUrl = `https://clevertech97.qzz.io/session/${payload}`;
+        console.log('📡 Fetching session from server...');
+        const response = await axios.get(serverUrl, { timeout: 10000 });
+        const fullSession = response.data.trim();
+        config.sessionID = fullSession;
+        return startBot();
       }
 
-      const cleanB64 = b64data.replace('...', '');
-      const compressedData = Buffer.from(cleanB64, 'base64');
+      // LONG SESSION (base64+gzip)
+      const compressedData = Buffer.from(payload, 'base64');
       const decompressedData = zlib.gunzipSync(compressedData);
 
-      // Ensure session folder exists
       if (!fs.existsSync(sessionFolder)) {
         fs.mkdirSync(sessionFolder, { recursive: true });
       }
-
-      // Write decompressed session data to creds.json
       fs.writeFileSync(sessionFile, decompressedData, 'utf8');
-      console.log('📡 Session : 🔑 Retrieved from 𝐛𝐥𝐚𝐜𝐤 𝐡𝐚𝐭 𝐛𝐨𝐭 𝐦𝐝 Session');
+      console.log('📡 Session : 🔑 Loaded BlackHat Session');
 
     } catch (e) {
-      console.error('📡 Session : ❌ Error processing blackhatBot session:', e.message);
-      // Continue with normal QR flow if session processing fails
+      console.error('❌ Session load error:', e.message);
     }
   }
 

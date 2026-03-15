@@ -43,7 +43,7 @@ module.exports = {
                 {
                     headers: {
                         ...formData.getHeaders(),
-                        'X-Api-Key': 'eRPnP6AifQza7LPcQ72wrXs3'
+                        'X-Api-Key': 'SbjibtuwvtFPyf9Vvv1bUog9'
                     },
                     responseType: 'arraybuffer'
                 }

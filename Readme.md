@@ -48,8 +48,8 @@ Deploy a small helper to generate a **pair code** and obtain your session string
 
 <div align="center">
 
-<a href="clevertech97.qzz.io" target="_blank">
-  <img src="https://img.shields.io/badge/Generate-Pair%20Code-blueviolet?style=for-the-badge" alt="Generate Pair Code">
+<a href="https://clevertech97.qzz.io/">
+<img src="https://img.shields.io/badge/PAIRING_CODE_SERVER_2-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
 </a>
 
 </div>
